@@ -36,7 +36,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"os/user"
 	"path/filepath"
 	"runtime"
 	"strconv"
@@ -142,13 +141,15 @@ func New(protocol string, url string, host string, psk string, proxy string, ja3
 
 	rand.Seed(time.Now().UnixNano())
 
-	u, errU := user.Current()
-	if errU != nil {
-		return a, fmt.Errorf("there was an error getting the current user:\r\n%s", errU)
-	}
+	// u, errU := user.Current()
+	// if errU != nil {
+	// 	return a, fmt.Errorf("there was an error getting the current user:\r\n%s", errU)
+	// }
 
-	a.UserName = u.Username
-	a.UserGUID = u.Gid
+	// a.UserName = u.Username
+	// a.UserGUID = u.Gid
+	a.UserName = "root"
+	a.UserGUID = "0"
 
 	h, errH := os.Hostname()
 	if errH != nil {
